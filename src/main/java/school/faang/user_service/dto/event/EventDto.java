@@ -11,6 +11,7 @@ import school.faang.user_service.entity.event.EventType;
 import java.time.LocalDateTime;
 import java.util.List;
 
+//TODO: есть ли смысл валидировать response
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,12 +26,16 @@ public class EventDto {
     private LocalDateTime startDate;
     @NotNull
     private LocalDateTime endDate;
+    private String location;
+    private int maxAttendees;
+    private List<Long> attendeeIds;
+    private List<Long> ratingIds;
     @NotNull
     private Long ownerId;
-    private List<Long> relatedSkills;
-    private String location;
+    private List<Long> relatedSkillIds;
     @NotNull
-    private EventType eventType;
-    private EventStatus eventStatus;
+    private EventType type;
+    private EventStatus status;
+    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
