@@ -26,4 +26,14 @@ public class UserController {
     public List<UserDto> getUsersByIds(@RequestBody List<Long> ids) {
         return userService.getUsersByIds(ids);
     }
+
+    @PostMapping("/{userId}/banned")
+    public void banUser(@PathVariable Long userId) {
+        userService.banUser(userId);
+    }
+
+    @PostMapping("/{userId}/unbanned")
+    public void unbanUser(@PathVariable Long userId) {
+        userService.unbanUser(userId);
+    }
 }

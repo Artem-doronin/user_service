@@ -43,4 +43,27 @@ public class UserServiceImpl implements UserService {
                 .map(userMapper::toUserDto)
                 .toList();
     }
+
+    @Transactional
+    @Override
+    public void banUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        if (user.getBanned()) {
+            return;
+        }
+
+        user.setBanned(true);
+        user.setUsername(user.getUsername() + "_1");
+    }
+
+    @Transactional
+    @Override
+    public void unbanUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        if (!user.getBanned()) {
+            return;
+        }
+
+        user.setBanned(false);
+    }
 }
