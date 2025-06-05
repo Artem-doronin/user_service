@@ -14,6 +14,7 @@ import school.faang.user_service.exception.goal.GoalNotFoundException;
 import school.faang.user_service.exception.skill.SkillNotFoundException;
 import school.faang.user_service.exception.user.UserNotFoundException;
 import school.faang.user_service.exception.authorization.UserUnauthorizedException;
+import school.faang.user_service.exception.user.UsernameAlreadyExistsException;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -29,6 +30,7 @@ public class UserServiceExceptionHandler {
             SkillNotFoundException.class, HttpStatus.NOT_FOUND,
             CountActiveGoalMoreMaxException.class, HttpStatus.CONFLICT,
             GoalAlreadyCompletedException.class, HttpStatus.CONFLICT,
+            UsernameAlreadyExistsException.class, HttpStatus.CONFLICT,
             MethodArgumentNotValidException.class, HttpStatus.BAD_REQUEST
     );
     private static final Map<Class<? extends Exception>, ErrorHandler> errorHandlers = Map.of(
@@ -43,6 +45,7 @@ public class UserServiceExceptionHandler {
             SkillNotFoundException.class,
             CountActiveGoalMoreMaxException.class,
             GoalAlreadyCompletedException.class,
+            UsernameAlreadyExistsException.class,
             MethodArgumentNotValidException.class
     })
     public ResponseEntity<UserServiceErrorResponseDto> handleException(Exception ex) {
