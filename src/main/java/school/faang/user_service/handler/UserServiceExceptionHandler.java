@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import school.faang.user_service.dto.error.UserServiceErrorResponseDto;
+import school.faang.user_service.exception.country.CountryNotFoundException;
 import school.faang.user_service.exception.goal.CountActiveGoalMoreMaxException;
 import school.faang.user_service.exception.goal.GoalAlreadyCompletedException;
 import school.faang.user_service.exception.goal.GoalNotFoundException;
@@ -28,6 +29,7 @@ public class UserServiceExceptionHandler {
             GoalNotFoundException.class, HttpStatus.NOT_FOUND,
             UserNotFoundException.class, HttpStatus.NOT_FOUND,
             SkillNotFoundException.class, HttpStatus.NOT_FOUND,
+            CountryNotFoundException.class, HttpStatus.NOT_FOUND,
             CountActiveGoalMoreMaxException.class, HttpStatus.CONFLICT,
             GoalAlreadyCompletedException.class, HttpStatus.CONFLICT,
             UsernameAlreadyExistsException.class, HttpStatus.CONFLICT,
@@ -43,6 +45,7 @@ public class UserServiceExceptionHandler {
             GoalNotFoundException.class,
             UserNotFoundException.class,
             SkillNotFoundException.class,
+            CountryNotFoundException.class,
             CountActiveGoalMoreMaxException.class,
             GoalAlreadyCompletedException.class,
             UsernameAlreadyExistsException.class,
@@ -73,7 +76,7 @@ public class UserServiceExceptionHandler {
     private ResponseEntity<UserServiceErrorResponseDto> createErrorResponse(String errorMsg,
                                                                             HttpStatus status,
                                                                             Exception ex) {
-        log.error("Error in GoalController: {}, response status {}", errorMsg, status, ex);
+        log.error("Error in user-service: {}, response status {}", errorMsg, status, ex);
         UserServiceErrorResponseDto response =
                 new UserServiceErrorResponseDto(errorMsg,LocalDateTime.now(), status.value());
         return new ResponseEntity<>(response, status);
