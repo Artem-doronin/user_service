@@ -53,7 +53,6 @@ public class UserServiceImpl implements UserService {
         }
 
         user.setBanned(true);
-        user.setUsername(user.getUsername() + "_1");
     }
 
     @Transactional
